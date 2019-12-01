@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Banks & Customers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="crud" class="form">
+            <p>Select The Entity you would like to operate in</p>
+            <select name="entity_selection">
+                <option value="Bank">Bank</option>
+                <option value="Customer">Customer</option>
+            </select>
+
+            <br/>
+            <p>Select operation</p>
+            <select name="operation_selection">
+                <option value="1">Add</option>
+                <option value="2">Find</option>
+                <option value="3">Update</option>
+                <option value="4">Delete</option>                
+            </select>
+            <br/>
+            <br/>
+            <input type="submit" value="Enter" />
+            
+        </form>
+        
+    </body>
+</html>
