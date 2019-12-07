@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet for holding and giving errors in areas of occurrence
+ * Servlet for holding and giving errors in areas of occurrence during entries
  * @author fabianokeke
  * @version 1.0
  */

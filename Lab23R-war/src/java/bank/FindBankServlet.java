@@ -29,7 +29,7 @@ import pl.polsl.lab1.model.BankServiceBean;
 public class FindBankServlet extends HttpServlet {
 
     /**
-     * Ejb injection
+     * Ejb injection of the bank bean
      */
     @EJB
     BankServiceBean bankService;
@@ -101,15 +101,17 @@ public class FindBankServlet extends HttpServlet {
                 errors.add("Wrong id format, can't be empty or float.");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
 
             Bank bank = bankService.findByBankId(id);
             if (bank != null) {
                 banks.add(bank);
             } else {
-                errors.add("Bank with given id doesn't exist!");
+                errors.add("Bank with given id doesn't exist");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
         }
 

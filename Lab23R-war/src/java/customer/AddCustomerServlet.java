@@ -26,17 +26,22 @@ import pl.polsl.lab1.model.Customer;
 import pl.polsl.lab1.model.CustomerServiceBean;
 
 /**
- *In charge of adding customers
+ * In charge of adding customers
+ *
  * @author fabianokeke
  * @version 1.0
  */
 public class AddCustomerServlet extends HttpServlet {
 
     /**
-     * Ejb injection
+     * Ejb injection of the bank service bean
      */
     @EJB
     BankServiceBean bankService;
+
+    /**
+     * Ejb injection of the customer service bean
+     */
     @EJB
     CustomerServiceBean customerService;
 
@@ -60,8 +65,6 @@ public class AddCustomerServlet extends HttpServlet {
             out.println("<title>Add Customer</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Adding a  new Customer....</h1>");
-
             out.println("<form action=\"Customer/add\" method=\"post\" >");
             out.println("<input type=\"text\" placeholder=\"Enter Customer First name\" name=\"customerFirstName\"/>");
             out.println("<input type=\"text\" placeholder=\"Enter Customer Last name\" name=\"customerLastName\"/>");
@@ -115,6 +118,7 @@ public class AddCustomerServlet extends HttpServlet {
             if (!errors.isEmpty()) {
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/add").forward(request, response);
+                return;
             }
             Date birthdate;
             try {

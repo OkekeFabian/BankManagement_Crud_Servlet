@@ -24,7 +24,7 @@ import pl.polsl.lab1.model.BankServiceBean;
 public class DeleteBankServlet extends HttpServlet {
 
     /**
-     * Ejb injection
+     * Ejb injection of the bank service bean
      */
     @EJB
     BankServiceBean bankService;
@@ -50,10 +50,9 @@ public class DeleteBankServlet extends HttpServlet {
             out.println("<title>Delete Bank</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Deleting a Bank...</h1>");
             out.println("<form action=\"Bank/delete\" method=\"post\" >");
                         out.println("<h3>Total amount of operations = " + getOperationCounter(request) + "</h3>");
-            out.println("<br/><label>Enter an id of bank you want to delete, make sure it exists.</label></br>");
+            out.println("<br/><label>Enter an id of bank you want to delete, make sure it has already been created.</label></br>");
             out.println("<input type=\"number\" placeholder=\"Bank id...\" name=\"bankId\"/>");
             out.println("<br/><input type=\"submit\" value=\"DELETE\"/>");
             out.println("</form>");
@@ -120,24 +119,25 @@ public class DeleteBankServlet extends HttpServlet {
             List<String> errors = new ArrayList<>();
             try {
                 id = Integer.parseInt(bankId);
-            } catch (NumberFormatException nfe) {
-                errors.add("Wrong id format, can't be empty or float.");
+            } catch (NumberFormatException e) {
+                errors.add("Wrong id format, it can't be empty or float.");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
             if (bankService.findByBankId(id) == null) {
-                errors.add("Bank with given id doesn't exist!");
+                errors.add("Bank with given id doesn't exist");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+               
             } else {
                 bankService.delete(id);
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
                 out.println("<head>");
-                out.println("<title>[CRUD]Delete Bank...</title>");
+                out.println("<title>Delete Bank...</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h1>Deleting a Bank...</h1>");
                 out.println("<p>Bank deleted successfully!</p>");
                 out.println("</br><a href=\"" + request.getContextPath() + "/\">Go back</a>");
                 out.println("</body>");

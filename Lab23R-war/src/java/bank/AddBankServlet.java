@@ -28,7 +28,7 @@ import pl.polsl.lab1.model.BankServiceBean;
 public class AddBankServlet extends HttpServlet {
 
     /**
-     * Ejb injection
+     * Ejb injection of the bank bean or controller
      */
     @EJB
     BankServiceBean bankService;
@@ -97,21 +97,22 @@ public class AddBankServlet extends HttpServlet {
             String bankLocation = request.getParameter("bankLocation");
             List<String> errors = new ArrayList<>();
             if (bankName.equals("")) {
-                errors.add("Department name cannot be empty!");
+                errors.add("Bank name cannot be left empty");
             }
             if (bankLocation.equals("")) {
-                errors.add("Department address cannot be empty");
+                errors.add("Bank location cannot be left empty");
             }
             if (!errors.isEmpty()) {
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/add").forward(request, response);
+                return;
             }
             Bank bank = new Bank(bankName, bankLocation);
             bankService.create(bank);
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>[CRUD]Add Bank </title>");
+            out.println("<title>Add Bank </title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Bank added!</h1>");

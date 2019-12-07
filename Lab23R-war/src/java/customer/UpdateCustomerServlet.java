@@ -38,14 +38,17 @@ import pl.polsl.lab1.model.CustomerServiceBean;
  */
 public class UpdateCustomerServlet extends HttpServlet {
 
+   /**
+     * Ejb injection of the bank service
+     */
+    @EJB
+    BankServiceBean bankService;
+    
     /**
-     * Ejb injection
+     * Ejb injection of the customer service bean
      */
     @EJB
     CustomerServiceBean customerService;
-    @EJB
-    BankServiceBean bankService;
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,7 +71,7 @@ public class UpdateCustomerServlet extends HttpServlet {
             out.println("<h1>Updating a Customer</h1>");
             out.println("<h2>leave field blank if no change is required</h2>");
             out.println("<form action=\"Customer/update\" method=\"post\" >");
-            out.println("<br/><label>Enter an id of customer you want to update, make sure it exists.</label></br>");
+            out.println("<br/><label>Enter an id of customer you want to update, make sure it has already been created.</label></br>");
             out.println("<br/>Id of the customer "
                     + "<input style='margin: 10px' type=\"number\" placeholder=\"Customer id\" name=\"customerId\"/>");
             out.println("<br/>New Customer First name "
@@ -114,10 +117,11 @@ public class UpdateCustomerServlet extends HttpServlet {
 
             try {
                 cusId = Integer.parseInt(customerId);
-            } catch (NumberFormatException nfe) {
+            } catch (NumberFormatException e) {
                 errors.add("Wrong customer id format, can't be empty or float.");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
 
             Customer customer = customerService.findCustomerById(cusId);
@@ -126,6 +130,7 @@ public class UpdateCustomerServlet extends HttpServlet {
                 errors.add("Customer with given id doesn't exist!");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
             if (!customerNewFirstName.equals("")) {
                 customer.setFirstName(customerNewFirstName);
@@ -153,6 +158,7 @@ public class UpdateCustomerServlet extends HttpServlet {
                 errors.add("Bank with given id doesn't exist!");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
 
             customerService.updateCustomer(customer);
@@ -165,7 +171,6 @@ public class UpdateCustomerServlet extends HttpServlet {
             out.println("<title>Update customer</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Updating a customer</h1>");
             out.println("<p>Customer updated successfully!</p>");
             out.println("</br><a href=\"" + request.getContextPath() + "/\">Go back</a>");
             out.println("</body>");

@@ -54,7 +54,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ErrorServlet</servlet-name>
-        <url-pattern>/ErrorServlet/*</url-pattern>
+        <url-pattern>/error/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FindBankServlet</servlet-name>

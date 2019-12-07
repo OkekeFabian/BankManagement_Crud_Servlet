@@ -9,9 +9,9 @@
             <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/bank/UpdateBankServlet.java</file>
             <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/customer/AddCustomerServlet.java</file>
             <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/link/CrudServlet.java</file>
-            <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/web/index.html</file>
-            <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/link/ErrorServlet.java</file>
+            <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/web/WEB-INF/web.xml</file>
             <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/bank/FindBankServlet.java</file>
+            <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/link/ErrorServlet.java</file>
             <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/customer/DeleteCustomerServlet.java</file>
             <file>file:/Users/fabianokeke/Downloads/Lab23R/Lab23R-war/src/java/customer/FindCustomerServlet.java</file>
         </group>

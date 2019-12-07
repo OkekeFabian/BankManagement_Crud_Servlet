@@ -34,7 +34,7 @@ import pl.polsl.lab1.model.BankServiceBean;
 public class UpdateBankServlet extends HttpServlet {
 
     /**
-     * Ejb injection
+     * Ejb injection of the bank service bean
      */
     @EJB
     BankServiceBean bankService;
@@ -105,6 +105,7 @@ public class UpdateBankServlet extends HttpServlet {
                 errors.add("Wrong id format, can't be empty or float.");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return ;
             }
              }
             Bank bank = bankService.findByBankId(id);
@@ -112,6 +113,7 @@ public class UpdateBankServlet extends HttpServlet {
                 errors.add("Bank with given id doesn't exist!");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
             if (!newBankName.equals("")) {
                 bank.setName(newBankName);
@@ -125,10 +127,9 @@ public class UpdateBankServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>[CRUD]Update bank</title>");
+            out.println("<title>Update bank</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Updating a bank</h1>");
             out.println("<p>Bank updated successfully!</p>");
             out.println("</br><a href=\"" + request.getContextPath() + "/\">Go back</a>");
             out.println("</body>");

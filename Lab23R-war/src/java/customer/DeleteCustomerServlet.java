@@ -24,7 +24,7 @@ import pl.polsl.lab1.model.CustomerServiceBean;
 public class DeleteCustomerServlet extends HttpServlet {
 
     /**
-     * Ejb injection
+     * Ejb injection of customer service bean
      */
     @EJB
     CustomerServiceBean customerService;
@@ -126,22 +126,22 @@ public class DeleteCustomerServlet extends HttpServlet {
                 errors.add("Wrong id format, can't be empty or float.");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
-                
+                return;
             }
             
             if (customerService.findCustomerById(id) == null) {
                 errors.add("Customer with given id doesn't exist!");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                
             } else {
                 customerService.delete(id);
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
                 out.println("<head>");
-                out.println("<title>[CRUD]Delete Customer...</title>");
+                out.println("<title>Delete Customer...</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h1>Deleting a Customer...</h1>");
                 out.println("<p>Customer deleted successfully!</p>");
                 out.println("</br><a href=\"" + request.getContextPath() + "/\">Go back</a>");
                 out.println("</body>");

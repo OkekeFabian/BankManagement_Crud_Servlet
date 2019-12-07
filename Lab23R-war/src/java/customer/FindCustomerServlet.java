@@ -30,7 +30,7 @@ public class FindCustomerServlet extends HttpServlet {
 
     
     /**
-     * Ejb injection
+     * Ejb injection of customer service bean
      */
     @EJB
     CustomerServiceBean customerService;
@@ -52,7 +52,7 @@ public class FindCustomerServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>[CRUD]Find Customers</title>");
+            out.println("<title>Find Customers</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Finding a Customer</h1>");
@@ -102,13 +102,15 @@ public class FindCustomerServlet extends HttpServlet {
                 errors.add("Wrong id format, can't be empty or float.");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             }
            
             Customer customer = customerService.findCustomerById(id);
             if ( customer== null) {
-                errors.add("Customer with given id doesn't exist!");
+                errors.add("Customer with given id doesn't exist");
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("/error/delete").forward(request, response);
+                return;
             } else {
                 customers.add(customer);
             }
